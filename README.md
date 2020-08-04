@@ -1,6 +1,6 @@
 This is a reproduction of a "More homes You May Like" carousel.
 
-create the database with ```< seed/schema.sql```
+create the database with ```npm run create-db``` (update credentials)
 
 seed the database with ```npm run seed```
 

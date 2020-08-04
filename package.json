@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint server/. db/. & eslint --ext jsx client/.",
+    "create-db": "mysql -u student -p < seed/schema.sql",
     "seed": "node seed/seed.js",
     "photo-seed": "node seed/aws.js",
     "react-dev": "webpack -d --watch",

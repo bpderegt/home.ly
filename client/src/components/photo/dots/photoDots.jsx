@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Dot from './dot.jsx';
 
 const DotWrapper = styled.div`
-  margin-top: 90%;
+  margin-top: 75%;
   height: 12px;
   max-width: 60px;
   position: absolute;
   display: flex;
-  // justify-content: flex-start;
   align-items: center;
   overflow: hidden;
   z-index: 1;
