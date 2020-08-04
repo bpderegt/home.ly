@@ -27,7 +27,7 @@ const initialize = (idx, callback) => {
 };
 
 const photoUrl = (callback) => {
-  db.query(`select home_id, file_url from photo_info;`, (err, info) => {
+  db.photoUrl((err, info) => {
     if (err) {
       callback(err)
     } else {

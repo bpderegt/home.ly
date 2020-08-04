@@ -41,7 +41,7 @@ const photoUpload = () => {
                       } else {
                         const homeId = parseInt(idx, 10);
                         // insert query for DB, inserts the URL returned from the s3.upload
-                        db.query(`INSERT INTO photo_info (home_id, file_url) values (${homeId}, "${succ.Location}")`, (err) => {
+                        db.seedQuery(`INSERT INTO photo_info (home_id, file_url) values (${homeId}, "${succ.Location}")`, (err) => {
                           if (err) {
                             console.log(err);
                           } else {

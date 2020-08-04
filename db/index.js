@@ -32,43 +32,50 @@ connection.connect()
 //   }
 // });
 
-// would like to split this out into a few different functions
-const query = (q, callback) => {
-  connection.query(q, callback);
-};
-
-const end = () => {
-  connection.end()
+const seedQuery = (query) => {
+  connection.query(query);
 }
 
 // getting the info for one home
 // ideally would refactor this to a promise chain
 const getHomeInfo = (id, callback) => {
-  connection.query(`SELECT * FROM home_info WHERE home_id = ${id}`, (err, response) => {
+  connection.query(`SELECT * FROM home_info WHERE home_id = ${id}`, (err, homes) => {
     if (err) {
       callback(err);
-    } else if (response.length === 0) {
-      callback(response);
+    } else if (homes.length === 0) {
+      callback(homes);
     } else {
-      connection.query(`SELECT * FROM photo_info WHERE home_id = ${id}`, (err, succ) => {
+      connection.query(`SELECT * FROM photo_info WHERE home_id = ${id}`, (err, photoUrls) => {
         if (err) {
           callback(err);
         } else {
           const photos = [];
           // iterate through the info returned from photo_info
-          succ.forEach((photo) => {
+          photoUrls.forEach((photo) => {
             // pull out the photo urls
             photos.push(photo.file_url);
           });
-          // add a photos property with the array of urls to the response object
-          response[0].photos = photos;
-          callback(null, response);
+          // add a photos property with the array of urls to the homes object
+          homes[0].photos = photos;
+          callback(null, homes);
         }
       });
     }
   });
 };
 
-module.exports.getHomeInfo = getHomeInfo;
-module.exports.query = query;
-module.exports.end = end;
+const photoUrl = (callback) => {
+  connection.query(`select home_id, file_url from photo_info;`, (err, info) => {
+    if (err) {
+      callback(err)
+    } else {
+      callback(null, info);
+    }
+  })
+}
+
+module.exports = {
+  photoUrl: photoUrl,
+  seedQuery: seedQuery,
+  getHomeInfo: getHomeInfo
+}

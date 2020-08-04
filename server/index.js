@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../db/index.js');
 const Model = require('./model.js');
 const cors = require('cors');
 
@@ -16,9 +15,9 @@ app.use(cors());
 app.get('/photoUrl', (req, res) => {
   Model.photoUrl((err, data) => {
     if (err) {
-      console.log(err)
+      res.status(404).send(err);
     } else {
-      res.send(data);
+      res.status(200).send(data);
     }
   });
 });
@@ -26,12 +25,13 @@ app.get('/photoUrl', (req, res) => {
 app.get('/moreHomes/:index', (req, res) => {
   Model.initialize(req.params.index, (err, data) => {
     if (err) {
-      console.log('get error')
       res.status(404).send(err);
     } else {
-      res.send(data);
+      res.status(200).send(data);
     }
   });
 });
 
-app.listen(port, () => console.log(`Ahoy cap't! Ready and Willing at port ${port}!!`));
+app.listen(port, () => {
+  console.log(`Ahoy cap't! Ready and Willing at port ${port}!!`)
+});
