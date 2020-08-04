@@ -43,8 +43,6 @@ const homeSeeder = (idx) => {
     const price = randNum(25, 1200);
     const isPlus = plus();
 
-    // console.log(`INSERT INTO home_info (home_id, title, home_type, beds, rating, rating_num, price, is_plus) VALUES (${idx}, "${title()}", "${type()}", ${beds}, ${rating}, ${ratingNum}, ${price}, ${isPlus});`)
-
     db.seedQuery(`INSERT INTO home_info (home_id, title, home_type, beds, rating, rating_num, price, is_plus) VALUES (${idx}, "${title()}", "${type()}", ${beds}, ${rating}, ${ratingNum}, ${price}, ${isPlus});`, (err, succ) => {
       if (err) {
         console.log(err);
@@ -60,7 +58,6 @@ const homeSeeder = (idx) => {
 
 const photoSeeder = () => {
   photoUrl.forEach((photo, index) => {
-    // console.log(`INSERT INTO photo_info (home_id, file_url) values (${photo.home_id}, "${photo.file_url}");`)
     db.seedQuery(`INSERT INTO photo_info (home_id, file_url) values (${photo.home_id}, "${photo.file_url}")`, (err) => {
       if (err) {
         console.log(err);
