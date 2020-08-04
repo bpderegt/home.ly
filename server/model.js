@@ -36,5 +36,4 @@ const photoUrl = (callback) => {
   })
 }
 
-module.exports.initialize = initialize;
-module.exports.photoUrl = photoUrl;
+module.exports = { initialize, photoUrl };

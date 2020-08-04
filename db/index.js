@@ -74,8 +74,4 @@ const photoUrl = (callback) => {
   })
 }
 
-module.exports = {
-  photoUrl: photoUrl,
-  seedQuery: seedQuery,
-  getHomeInfo: getHomeInfo
-}
+module.exports = { photoUrl, seedQuery, getHomeInfo }
